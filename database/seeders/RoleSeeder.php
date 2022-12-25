@@ -4,8 +4,9 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class RoleSeeder extends Seeder
 {
@@ -16,7 +17,10 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-  /*      $column = [
+        DB::beginTransaction();
+        try {
+
+        $column = [
             'name' => ''
         ];
 
@@ -33,10 +37,16 @@ class RoleSeeder extends Seeder
                 Role::create($column);
             }
         }
-*/
-        // $user = User::find(1);
+
+        $user = User::find(1);
         $role = Role::find(1);
+        $user->assignRole($role);
         $Permission = Permission::find(3);
         $role->givePermissionTo($Permission);
+        DB::commit();
+        }
+        catch (\Throwable $th) {
+        DB::rollBack();
+        }
     }
 }
