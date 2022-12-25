@@ -16,24 +16,26 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        // $column = [
-        //     'name' => ''
-        // ];
+  /*      $column = [
+            'name' => ''
+        ];
 
-        // $role = [
-        //     'admin',
-        // ];
+        $role = [
+            'admin',
+            'staff',
+            'spv',
+            'manager',
+        ];
 
-        // foreach ($column as $keyColumn => $valueColumn) {
-        //     foreach ($role as $keyRole => $value) {
-        //         $column[$keyColumn] = $value;
-        //         Role::create($column);
-        //     }
-        // }
-
+        foreach ($column as $keyColumn => $valueColumn) {
+            foreach ($role as $keyRole => $value) {
+                $column[$keyColumn] = $value;
+                Role::create($column);
+            }
+        }
+*/
         $user = User::find(1);
         $Permission = Permission::find(3);
-        // print_r($user);
         $user->givePermissionTo($Permission);
     }
 }
