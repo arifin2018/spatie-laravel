@@ -34,8 +34,9 @@ class RoleSeeder extends Seeder
             }
         }
 */
-        $user = User::find(1);
+        // $user = User::find(1);
+        $role = Role::find(1);
         $Permission = Permission::find(3);
-        $user->givePermissionTo($Permission);
+        $role->givePermissionTo($Permission);
     }
 }
