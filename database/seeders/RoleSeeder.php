@@ -43,6 +43,8 @@ class RoleSeeder extends Seeder
         $user->assignRole($role);
         $Permission = Permission::find(3);
         $role->givePermissionTo($Permission);
+        $role->givePermissionTo(Permission::find(2));
+        $role->givePermissionTo(Permission::find(4));
         DB::commit();
         }
         catch (\Throwable $th) {
