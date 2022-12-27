@@ -22,6 +22,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::resource('role',RoleController::class);
+Route::group(['middleware' => 'auth'], function () {
+    Route::resource('role', RoleController::class)->middleware('auth');
+});
 
-require __DIR__.'/auth.php';
+
+
+require __DIR__ . '/auth.php';

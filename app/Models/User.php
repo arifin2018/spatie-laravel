@@ -6,7 +6,9 @@ use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\model_has_roles;
 
 class User extends Authenticatable
 {
@@ -38,4 +40,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function model_has_roles()
+    {
+        return $this->HasMany(model_has_roles::class, 'model_id', 'id');
+    }
 }

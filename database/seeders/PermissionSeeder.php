@@ -19,10 +19,10 @@ class PermissionSeeder extends Seeder
         ];
 
         $Permission = [
-            'read role',
-            'create role',
-            'update role',
-            'delete role',
+            'read_role',
+            'create_role',
+            'update_role',
+            'delete_role',
         ];
 
         foreach ($column as $keyColumn => $valueColumn) {

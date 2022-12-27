@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class RoleController extends Controller
 {
@@ -13,8 +19,21 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $this->authorize('create role');
-        return 'hai';
+        // $user = User::find(Auth::user()->id);
+        // $role = Role::findByName('admin');
+        // $role->givePermissionTo('delete role');
+        // return $role;
+        $users = User::with(['model_has_roles.roles.permissions'])->find(Auth::user()->id);
+        // $userAdmin = DB::table('users')
+        //     ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+        //     ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
+        //     ->join('role_has_permissions', 'roles.id', '=', 'role_has_permissions.role_id')
+        //     ->join('permissions', 'role_has_permissions.permission_id', '=', 'permissions.id')
+        //     ->where('users.name', '=', $users->name)
+        //     ->select('users.*', 'roles.name as roles', 'permissions.name')->get();
+        Gate::authorize('view', $users);
+
+        return view('roles.index');
     }
 
     /**
